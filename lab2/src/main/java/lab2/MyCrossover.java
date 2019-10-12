@@ -14,18 +14,24 @@ public class MyCrossover extends AbstractCrossover<double[]> {
     protected List<double[]> mate(double[] p1, double[] p2, int i, Random random) {
         ArrayList children = new ArrayList();
 
+        int size = p1.length;
+        double[] C1 = new double[size];
+        double[] C2 = new double[size];
 
-        for(int j=0; j<i; j++) {
-            int indice = random.nextInt(p1.length - 1 );
-            double p1Temp = p1[indice];
-            p1[indice] = p2[indice];
-            p2[indice] = p1Temp;
+        int indice = random.nextInt(size-1);
+
+        for(int j=0; j<size; j++) {
+            if (j < indice) {
+                C1[j] = p1[j];
+                C2[j] = p2[j];
+            } else {
+                C2[j] = p1[j];
+                C1[j] = p2[j];
+            }
         }
 
-        // your implementation:
-
-        children.add(p1);
-        children.add(p2);
+        children.add(C1);
+        children.add(C2);
         return children;
     }
 }
